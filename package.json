@@ -1,0 +1,22 @@
+{
+  "name": "simple-mocha-reporter",
+  "version": "1.0.0",
+  "description": "simple, readable mocha reporter",
+  "keywords": ["simple", "mocha", "reporter"],
+  "author": "Andrew Gallagher <kivlor@gmail.com>",
+  "main": "lib/reporter.js",
+  "scripts": {
+    "build": "coffee --bare --no-header -o lib/ -c src/",
+    "prepublish": "npm run build",
+    "test": "mocha --compilers coffee:coffee-script/register",
+    "test:reporter": "npm run build && npm test -- --reporter lib/reporter"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^3.2.0"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.12.2"
+  }
+}
