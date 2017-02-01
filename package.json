@@ -1,9 +1,13 @@
 {
   "name": "simple-mocha-reporter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a simple, readable mocha reporter",
-  "keywords": ["simple", "mocha", "reporter"],
-  "author": "Andrew Gallagher <kivlor@gmail.com>",
+  "keywords": [
+    "simple",
+    "mocha",
+    "reporter"
+  ],
+  "author": "",
   "main": "lib/reporter.js",
   "bugs": {
     "url": "https://github.com/kivlor/simple-mocha-reporter/issues"
@@ -15,7 +19,6 @@
     "test": "mocha --compilers coffee:coffee-script/register",
     "test:reporter": "npm run build && npm test -- --reporter lib/reporter"
   },
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "mocha": "^3.2.0"
