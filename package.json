@@ -14,7 +14,7 @@
   },
   "repository": "github:kivlor/simple-mocha-reporter",
   "scripts": {
-    "build": "coffee --bare --no-header -o lib/ -c src/",
+    "build": "rm -rf lib/ && coffee --bare --no-header -o lib/ -c src/",
     "prepublish": "npm run build",
     "test": "mocha --compilers coffee:coffee-script/register",
     "test:reporter": "npm run build && npm test -- --reporter lib/reporter"
