@@ -1,6 +1,6 @@
 {
   "name": "simple-mocha-reporter",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a simple, readable mocha reporter",
   "keywords": [
     "simple",
