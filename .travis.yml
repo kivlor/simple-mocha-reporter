@@ -4,3 +4,7 @@ node_js:
   - "6"
   - "5"
   - "4"
+
+build:
+  - npm run lint
+  - npm run test

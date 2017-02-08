@@ -1,19 +1,68 @@
 assert = require 'assert'
+mocha = require 'mocha'
+Base = mocha.reporters.Base
 
-describe 'Foo', () ->
-  describe 'given a passing assertion', () ->
-    it 'should pass with a green message', () ->
-      assert yes
+Simple = require '../src/reporter'
 
-  describe 'given a failing assertion', () ->
-    it 'should fail with a red message', () ->
-      assert no
+runner = {}
+stdout = []
+stdoutWrite = null
+useColors = null
 
-describe 'Bar', () ->
-  describe 'given a passing assertion', () ->
-    it 'should pass with a green message', () ->
-      assert yes
+describe 'Simple Reporter', () ->
+  beforeEach () ->
+    stdout = []
+    runner = {}
 
-  describe 'given a failing assertion', () ->
-    it 'should fail with a red message', () ->
-      assert no
+    stdoutWrite = process.stdout.write
+    process.stdout.write = (string) -> stdout.push string
+
+    useColors = Base.useColors
+    Base.useColors = false
+
+  describe 'on suite start', () ->
+    it 'should print suite title', () ->
+      suite =
+        title: 'Suite Title'
+
+      runner.on = (event, cb) ->
+        if event is 'suite' then cb suite
+
+      Simple.call { epilogue: () -> null }, runner
+      
+      process.stdout.write = stdoutWrite
+      Base.useColors = useColors
+
+      assert.equal stdout[0], "Suite Title\n"
+
+  describe 'on test pass', () ->
+    it 'should print test title with tick', () ->
+      test =
+        title: 'Test Title'
+        duration: 1
+        slow: () -> 1
+
+      runner.on = (event, cb) ->
+        if event is 'pass' then cb test
+
+      Simple.call { epilogue: () -> null }, runner
+      
+      process.stdout.write = stdoutWrite
+      Base.useColors = useColors
+
+      assert.equal stdout[0], " #{Base.symbols.ok} Test Title\n"
+
+  describe 'on test fail', () ->
+    it 'should print test title with cross', () ->
+      test =
+        title: 'Test Title'
+
+      runner.on = (event, cb) ->
+        if event is 'fail' then cb test
+
+      Simple.call { epilogue: () -> null }, runner
+      
+      process.stdout.write = stdoutWrite
+      Base.useColors = useColors
+
+      assert.equal stdout[0], " #{Base.symbols.err} Test Title\n"
