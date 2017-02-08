@@ -2,6 +2,8 @@
 
 A simple, readable [Mocha](https://mochajs.org/) reporter.
 
+![https://travis-ci.org/kivlor/simple-mocha-reporter.svg?branch=master](https://travis-ci.org/kivlor/simple-mocha-reporter.svg?branch=master)
+
 #### Usage
 
 Install as a devDependency:
